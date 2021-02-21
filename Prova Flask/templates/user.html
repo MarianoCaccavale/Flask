@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block titolo%}
+    <title>User</title>
+{% endblock%}
+{% block body %}
+    {% if user != None %}
+        <p>Benvenuto utente {{user}}</p>
+        
+    {% else %}
+        <p>Benvenuto</p>
+    {% endif %}
+{% endblock %}

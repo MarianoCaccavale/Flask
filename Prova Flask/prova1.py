@@ -1,28 +1,36 @@
-from flask import Flask, redirect, url_for, render_template, request
+from flask import Flask, redirect, url_for, render_template, request, session
+from datetime import timedelta
 
 app = Flask(__name__)
+app.secret_key = "prova_flask"
+app.permanent_session_lifetime = timedelta(minutes=5)
 
-@app.route("/", methods = ['POST', 'GET'])
+@app.route("/")
 def home():
-    return render_template("template1.html", content="prova contenuto dinamica riuscita")
+    return render_template("template1.html")
+
+@app.route("/user")
+def user():
+    return render_template("user.html", user = session["name"])
 
 @app.route("/admin")
 def admin():
-	return redirect(url_for("user", name= "Admin"))
+        
+    session["name"] = "Admin"
+    session["psw"] = "superSecretPassword"
 
-@app.route("/culo")
-def culo():
-    return f"<h1>CULO</h1>"
-
+    return redirect(url_for("user", user = session["name"]))
 
 
 @app.route("/login", methods = ['POST', 'GET'])
 def login():
     if request.method == 'GET':
-            
             return render_template("login.html")
     else:
-            return redirect( url_for ('culo'))
+            session["name"] = request.form["name"]
+            session["psw"] = request.form["psw"]
+            return redirect( url_for ('user', user = request.form["name"]))
+
 
 
 app.static_folder = 'static'
