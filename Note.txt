@@ -1,0 +1,8 @@
+18/02/2021
+
+funzionano gli stylesheet. IMPORTANTE: PER FARLI FUNZIONARE(IN MODO PULITO) BISOGNA CREARE UNA CARTELLA "STATIC" IN CUI INSERIRE TUTTE LE COMPONENTI STATICHE(immagini, css, ecc.) E NELL'HREF DELL'HTML INSERIRE "url_for('static' filename='[stylesheet/script/qualcosa]/[nome-file].css')"
+ricordarsi di aggiungere nel file .py "app.static_folder = 'static'"
+
+url_for() PRENDE IN INPUT UNA FUNZIONE, e di conseguenza genera il percorso di quella funzione(app.route())
+
+negli HREF usare sempre url_for()
