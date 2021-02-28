@@ -6,3 +6,65 @@ ricordarsi di aggiungere nel file .py "app.static_folder = 'static'"
 url_for() PRENDE IN INPUT UNA FUNZIONE, e di conseguenza genera il percorso di quella funzione(app.route())
 
 negli HREF usare sempre url_for()
+
+27/02/2021
+
+Prova di aggiunta database, sarebbe carino aggiungere anche il supporto sandbox paypal, chissà
+----------------------------------------------------------------------------------------------------
+{% for a in content %}
+          <h1>{{a}}</h1>
+{% endfor %}
+
+content è un argomento passato da back-end(in questo caso la lista degli aeroporti del progetto di OO). Tale lista è stata
+presa da un DB, tramite il comande "OggettoDB".qyery.all(). "OggettoDB" è una classe che mappa 1:1 la tabella presente nel
+db. Prende in input db.Model. Sintassi sulla doc di SQLAlchemy. 
+
+----------------------------------------------------------------------------------------------------
+
+Comandi per setup:
+
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
+
+app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://"utente":"nomeserver"@localhost:5432/"nomeDB" "
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db = SQLAlchemy(app)
+migrate = Migrate(app, db)
+
+
+28/02/2021
+
+Creato un nuovo db "prova_flask" in modo da non toccare quello universitario. Inizio le prime prove
+per stampare risultati più complessi(l'idea è quella di stampare bene un post)
+
+Per chiarezza di codice ho deciso di spostare tutte le classi che riguardano il database in un file chiamato "models.py"
+In questo modo ho il lato database separato da quello backend. Ovviamente doveva rompere qualcosa. Facendo così, è come se
+stessi creando "una libereria"(a Mogavero piace questo elemento(credo)); quindi se voglio usare roba da una libreria devo 
+importarla come le persone normali usando:
+
+import importrlib
+
+"nomelibreria" = importlib.import_module("nomemodulo")
+
+facendo queso creo un handler del modulo chiamato "nomelibreria", che contiene tutto di "nomemodulo". Per referenziare le
+classi presenti in nomemodulo devo però usare "nomelibreria.nomeclasse(.nomefunzione)", che ovviamente è un po' il cesso, 
+ma whatever, iniziamo a vedere se funziona. Il codice fin qui sembra runnare dinamicamente.
+
+------------------------------------------------------------------------------------------------------
+
+esperimento riuscito, solo che la stampa è un po' brutta. Da migliorare, non per forza adesso. (si potrebbero creare getter
+e setter per le varie tabella, ma sarebbero da inserire in jinja come funzioni a parte, da approfondire.)
+
+------------------------------------------------------------------------------------------------------
+
+inserimento di un aeroport runtime riuscito. istruzioni:
+
+db.session.add(aer)
+db.session.commit()
+
+in questo caso aer è un oggetto presente in models che contiene le informazioni dell'oggetto di cui stiamo andando a fare
+l'insert. Credo aggiunga automaticamente alla tabella giusta. EDIT(no, non elementi di informatica teorica): si,
+l'inserimento avviene nella tabella giusta automaticamente
+
+

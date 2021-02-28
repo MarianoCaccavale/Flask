@@ -19,7 +19,7 @@
                   <a class="nav-link" href="{{ url_for ( 'login' )}}" method = "GET">Login</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Logout</a>
+                  <a class="nav-link" href="{{url_for ( 'aeroporto' )}}" method = "GET">Aeroporti</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="#">Disabled</a>
@@ -27,6 +27,11 @@
               </ul>
             </div>
           </nav>
+
+
+        {% for a in content %}
+          <h1>{{a}}</h1>
+        {% endfor %}
 
         {% block body %}
         {% endblock %}
