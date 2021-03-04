@@ -67,4 +67,19 @@ in questo caso aer è un oggetto presente in models che contiene le informazioni
 l'insert. Credo aggiunga automaticamente alla tabella giusta. EDIT(no, non elementi di informatica teorica): si,
 l'inserimento avviene nella tabella giusta automaticamente
 
+usare php non è una buona idea. A quanto pare non funziona in Flask
 
+
+02/03/2021
+
+Quasi sicuramente al 100% avrò bisogno di usare dei JSON per passare informazioni da una pagina all'altra. Questo ovviamento
+mi faciliterà tantissimo il lavoro, ma devo capire bene come utilizzarli/crearli. Inoltre, (benedizione Sergione Di Martino)
+se progetto prima per cosa e come mi servono i vari JSON posso standandizzarli tipo una classe ed usare attributi comuni. 
+Sostanzialmente dargli una struttura quasi sempre uguale in modo da fare le cose in modo più sistemato e non "a cazzo di
+cane". Si vedrà.
+
+------------------------------------------------------------------------------------------------------
+
+python incorpora un modulo automatico per la gestione dei json(*schiocco di lingua* "nice"). Basta importare "json".
+Le istruzione principali sono loads e dumps. Dumps serve per passare da un dizionario(ovvero come python gestisce i json)
+ad un json effettivo, mentre load da il contrario, crea un dizionario e vi inserisce i dati del json.

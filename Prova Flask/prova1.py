@@ -1,4 +1,5 @@
 from flask import Flask, redirect, url_for, render_template, request, session
+import json
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 import importlib
@@ -26,6 +27,9 @@ migrate = Migrate(app, db)
 app.secret_key = "prova_flask"
 app.permanent_session_lifetime = timedelta(hours=5)
 
+prova = json.dumps('{"nome": "Jhon", "età" : 29, "isSingle": True}')
+
+dizionarioDaJson = json.loads(prova)
 
 
 @app.route("/")
@@ -48,8 +52,11 @@ def admin():
 @app.route("/login", methods = ['POST', 'GET'])
 def login():
     if request.method == 'GET':
-            return render_template("login.html")
+
+            return render_template("login_utente.html")
+
     else:
+        
             cars = model.Aeroporto.query.all()
             session["name"] = request.form["name"]
             session["psw"] = request.form["psw"]
@@ -67,7 +74,8 @@ def aeroporto():
         post = model.Post(post_id = request.form["id_aeroporto"], descrizione = request.form["name_aeroporto"], utente_id = request.form["città_aeroporto"], data_pubblicazione = None)
         db.session.add(post)
         db.session.commit()
-        return render_template("base.html", content = "inserimento avvenuto con successo")
+        lista = model.Aeroporto.query.all()
+        return render_template("base.html", content = lista)
 
 app.static_folder = 'static'
 
